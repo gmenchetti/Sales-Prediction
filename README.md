@@ -18,6 +18,6 @@ The evaluation metric used for this problem is the following:
 
 where:
 - <a href="https://www.codecogs.com/eqnedit.php?latex=$E_r$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$E_r$" title="$E_r$" /></a>: *Region Error*
-- *E*: *Total Error*
-- *R*: *Regions*
+- <a href="https://www.codecogs.com/eqnedit.php?latex=$E$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$E$" title="$E$" /></a>: *Total Error*
+- <a href="https://www.codecogs.com/eqnedit.php?latex=$R$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$R$" title="$R$" /></a>: *Regions*
 
