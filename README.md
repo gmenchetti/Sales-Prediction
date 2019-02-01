@@ -36,8 +36,8 @@ The provided dataset is composed of 523,021 entries each one representing the sa
 - Features concerning the day, indicating if the store is open or not, if it has promotions, the number of customers and other information about the weather
 - Features concerning the region
 The dataset is composed by samples taken from 749 stores, such that:
-- 624 stores with $729$ samples
-- 125 stores with $545$ samples
+- 624 stores with 729 samples
+- 125 stores with 545 samples
 
-A more detailed description of the dataset can be found in the <a href="http://www.google.com">reference paper</a>
+A more detailed description of the dataset can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/Paper/Paper.pdf">reference paper</a>
 
