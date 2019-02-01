@@ -12,9 +12,11 @@ In order to deal with this problem, two main different approaches have been trie
 ## Evaluation Metric
 The evaluation metric used for this problem is the following:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=$$E_r&space;=&space;\frac{\sum_{i\in&space;S_r}{}\sum_{j\in&space;\{3,4\}}{}|a_{i,j}-p_{i,j}|}{\sum_{i\in&space;S_r}{}\sum_{j\in&space;\{3,4\}}{}|a_{i,j}|}$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$$E_r&space;=&space;\frac{\sum_{i\in&space;S_r}{}\sum_{j\in&space;\{3,4\}}{}|a_{i,j}-p_{i,j}|}{\sum_{i\in&space;S_r}{}\sum_{j\in&space;\{3,4\}}{}|a_{i,j}|}$$" title="$$E_r = \frac{\sum_{i\in S_r}{}\sum_{j\in \{3,4\}}{}|a_{i,j}-p_{i,j}|}{\sum_{i\in S_r}{}\sum_{j\in \{3,4\}}{}|a_{i,j}|}$$" /></a>
+<p align="center">
+  <a href="https://www.codecogs.com/eqnedit.php?latex=$$E_r&space;=&space;\frac{\sum_{i\in&space;S_r}{}\sum_{j\in&space;\{3,4\}}{}|a_{i,j}-p_{i,j}|}{\sum_{i\in&space;S_r}{}\sum_{j\in&space;\{3,4\}}{}|a_{i,j}|}$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$$E_r&space;=&space;\frac{\sum_{i\in&space;S_r}{}\sum_{j\in&space;\{3,4\}}{}|a_{i,j}-p_{i,j}|}{\sum_{i\in&space;S_r}{}\sum_{j\in&space;\{3,4\}}{}|a_{i,j}|}$$" title="$$E_r = \frac{\sum_{i\in S_r}{}\sum_{j\in \{3,4\}}{}|a_{i,j}-p_{i,j}|}{\sum_{i\in S_r}{}\sum_{j\in \{3,4\}}{}|a_{i,j}|}$$" /></a>
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=$$E&space;=&space;\frac{\sum_{r\in&space;R}{}E_r}{|R|}$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$$E&space;=&space;\frac{\sum_{r\in&space;R}{}E_r}{|R|}$$" title="$$E = \frac{\sum_{r\in R}{}E_r}{|R|}$$" /></a>
+  <a href="https://www.codecogs.com/eqnedit.php?latex=$$E&space;=&space;\frac{\sum_{r\in&space;R}{}E_r}{|R|}$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$$E&space;=&space;\frac{\sum_{r\in&space;R}{}E_r}{|R|}$$" title="$$E = \frac{\sum_{r\in R}{}E_r}{|R|}$$" /></a>
+</p>
 
 where:
 - <a href="https://www.codecogs.com/eqnedit.php?latex=$E_r$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$E_r$" title="$E_r$" /></a>: *Region Error*
