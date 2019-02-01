@@ -9,6 +9,12 @@ In order to deal with this problem, two main different approaches have been trie
 - A regression model that does not maintain information of previous predictions
 - An autoregressive model that uses information concerning the time maintaining information of previous predictions
 
+In both cases, we first applied some preprocessing to the data, then some Machine Learning models have been tested in order to find the most suitable learning method for this specific problem.
+
+For both methods we tested different type of regression model, both ensemble or simple models.
+
+The performance are evaluated on a test set built with a cross-validation method for time series data.
+
 ## Evaluation Metric
 The evaluation metric used for this problem is the following:
 
