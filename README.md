@@ -39,5 +39,5 @@ The dataset is composed by samples taken from 749 stores, such that:
 - 624 stores with 729 samples
 - 125 stores with 545 samples
 
-A more detailed description of the dataset can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/Paper/Paper.pdf">reference paper</a>
+A more detailed description of the dataset can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/Paper/Menchetti-Norcini.pdf">reference paper</a>.
 
