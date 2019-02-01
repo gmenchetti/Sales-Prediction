@@ -30,3 +30,14 @@ where:
 - <a href="https://www.codecogs.com/eqnedit.php?latex=$E$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$E$" title="$E$" /></a>: *Total Error*
 - <a href="https://www.codecogs.com/eqnedit.php?latex=$R$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$R$" title="$R$" /></a>: *Regions*
 
+## Dataset
+The provided dataset is composed of 523,021 entries each one representing the sale for a specific store in a specific day. Each entry in the dataset is composed of various features, that can be grouped in the following categories:
+- Features concerning the store (ID, region, type of store, type of assortment, nearest competitor)
+- Features concerning the day, indicating if the store is open or not, if it has promotions, the number of customers and other information about the weather
+- Features concerning the region
+The dataset is composed by samples taken from 749 stores, such that:
+- 624 stores with $729$ samples
+- 125 stores with $545$ samples
+
+A more detailed description of the dataset can be found in the <a href="http://www.google.com">reference paper</a>
+
