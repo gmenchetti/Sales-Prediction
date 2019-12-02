@@ -1,5 +1,8 @@
 # Sales-Prediction
-A forecasting method to optimize promotions and warehouse stocks, based on classical machine learning regression methods.
+This repository contains the implementation of a forecasting method to optimize promotions and warehouse stocks, based on machine learning regression methods for the 2018 Data Mining class at Politecnico di Milano.
+
+### NOTE:
+The dataset used are not provided since they are not public.
 
 ## Introduction
 The presented problem is a forecasting problem based on the sales of 769 stores located on 11 different regions. the data is available for a period of 23 months starting from the 01/03/2016.
@@ -43,10 +46,27 @@ The dataset is composed by samples taken from 749 stores, such that:
 A more detailed description of the dataset can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/Paper/Menchetti-Norcini.pdf">reference paper</a>, while an analysis of the data is provided in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/Exploratory_Data_analysis.ipynb">Jupyter notebook</a>.
 
 ## Implementation
-This project was implemented in **Python** using a variety of libraries.
+This project was implemented and tested using **Python 3.6**.
 
-Two main approaches have been explored:
+Two regression approaches have been explored:
 - **Standard Regression**: A model built without features containing information about the number of sales on previous time-steps.
 - **Auto Regression**: An autoregressive model that uses informations from previous previously predicted values as input to a regression equation to predict the value of the next time step. The proposed method, builds a model *M* such that: <a href="https://www.codecogs.com/eqnedit.php?latex=$y_{t&plus;1}&space;=&space;M(y_{t},&space;y_{t-1},&space;...,&space;y_{t-n})$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$y_{t&plus;1}&space;=&space;M(y_{t},&space;y_{t-1},&space;...,&space;y_{t-n})$" title="$y_{t+1} = M(y_{t}, y_{t-1}, ..., y_{t-n})$" /></a>. In order to build this model, the train set has been enriched with the following informations:
   - The mean of the *n* previous days
   - The sales of *k* previous time-steps (i.e. the *lag* of the sales)
+
+The above approaches have been tested with the following machine learning algorithms:
+- k-Nearest Neighbors
+- Random Forest
+- Others (Linear Regression, SVM, AdaBoost, Stacking method)
+
+## Results
+|**Model**|**Learner**|**Mean error**|**Error variance**|
+|---------|-----------|--------------|------------------|
+| Regression | k-NN | 0.087 | 0.05 |
+| Regression | Random Forest | 0.062 | 0.03 |
+| Autoregression | k-NN | 0.097 | 0.06 |
+| Autoregression | Random Forest | 0.074 | 0.05 |
+
+Where the *Mean error* is calculated as described in the Evaluation Metric section.
+
+More information about the implementation can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/Paper/Menchetti-Norcini.pdf">reference paper</a>.
