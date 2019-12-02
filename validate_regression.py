@@ -8,9 +8,7 @@ import numpy as np
 import pickle
 
 start_date = "2016-04"
-
 scores = []
-
 m = 'rf'
 
 for dt in pd.date_range(start_date, periods=22, freq='M'):

@@ -1,63 +1,36 @@
-from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor
 from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.model_selection import cross_validate
-from sklearn.linear_model import LinearRegression
-from sklearn.tree import DecisionTreeRegressor
-from scipy.stats.mstats import winsorize
-from sklearn.svm import LinearSVR, SVR
-from sklearn.metrics import r2_score
-from sklearn.utils import shuffle
 from datetime import datetime, timedelta
-from time import time
 import pandas as pd
 import numpy as np
-from scipy.interpolate import interp1d
-from scipy.stats import gumbel_l, gamma
-from tqdm import *
-import warnings
 import copy
 
-warnings.simplefilter('ignore')
+event_list = ['Rain', 'Fog', 'NoEvent', 'Snow', 'Thunderstorm', 'Hail']
+fields = ["StoreType", "WeekDay", "Region", "Month", "AssortmentType"]
+features = [
+	'StoreID', 'Date', 'IsOpen', 'IsHoliday', 'HasPromotions', 'NumberOfSales',
+	'StoreType_Hyper Market','StoreType_Shopping Center', 'StoreType_Standard Market',
+	'StoreType_Super Market','NearestCompetitor',
+	'WeekDay_0', 'WeekDay_1', 'WeekDay_2','WeekDay_3',
+	'WeekDay_4', 'WeekDay_5', 'WeekDay_6', 'Region_0',
+	'Region_1', 'Region_2', 'Region_3', 'Region_4', 'Region_5',
+	'Region_6','Region_7', 'Region_8', 'Region_9', 'Region_10',
+	'Month_1', 'Month_2','Month_3', 'Month_4', 'Month_5', 'Month_6',
+	'Month_7', 'Month_8','Month_9', 'Month_10', 'Month_11', 'Month_12',
+	'AssortmentType_General','AssortmentType_With Fish Department', 'AssortmentType_With Non-Food Department']
 
-class TrainPreprocessing():
-
+class TrainPreprocessingAutoreg():
 	def __init__(self, data, to_date):
-
 		self.data = copy.deepcopy(data)
 		self.win_size = 60
-
-		event_list = ['Rain', 'Fog', 'NoEvent', 'Snow', 'Thunderstorm', 'Hail']
-		fields = ["StoreType", "WeekDay", "Region", "Month", "AssortmentType"]
-		features = [
-			'StoreID', 'Date', 'IsOpen', 'IsHoliday', 'HasPromotions', 'NumberOfSales',
-			'StoreType_Hyper Market','StoreType_Shopping Center', 'StoreType_Standard Market',
-			'StoreType_Super Market','NearestCompetitor',
-			'WeekDay_0', 'WeekDay_1', 'WeekDay_2','WeekDay_3',
-			'WeekDay_4', 'WeekDay_5', 'WeekDay_6', 'Region_0',
-			'Region_1', 'Region_2', 'Region_3', 'Region_4', 'Region_5',
-			'Region_6','Region_7', 'Region_8', 'Region_9', 'Region_10',
-			'Month_1', 'Month_2','Month_3', 'Month_4', 'Month_5', 'Month_6',
-			'Month_7', 'Month_8','Month_9', 'Month_10', 'Month_11', 'Month_12',
-			'AssortmentType_General','AssortmentType_With Fish Department', 'AssortmentType_With Non-Food Department']
-
 		self.data["Date"] = pd.to_datetime(self.data['Date'], format='%d/%m/%Y')
-
 		self.add_date_columns(date_column_name="Date", month=True, day_of_week=True)
-
 		self.split_attribute_list(column="Events", attributes=event_list, fillna="NoEvent")
-
 		self.one_hot_encode(fields=fields)
-
 		self.data = self.data[features]
-
 		self.data = self.data[self.data["Region_2"] != 1]
-
 		self.data = self.data[self.data["Date"] < to_date]
-
 		self.add_history_features(lags=[7, 14], mean=True)
-
 		self.data = self.data[self.data["IsOpen"] == 1]
-
 		self.X = np.array(self.data.drop(["StoreID", "IsOpen", "Date", "NumberOfSales"], inplace=False, axis = 1))
 		self.y = np.array(self.data["NumberOfSales"])
 
@@ -91,9 +64,7 @@ class TrainPreprocessing():
 			self.data["WeekDay"] = self.data[date_column_name].dt.dayofweek
 
 	def add_history_features(self, lags, mean=True):
-
 		tmp = copy.deepcopy(self.data)
-		
 		if mean:
 			self.data['mean'] = tmp.sort_values(["Date"], axis=0, ascending=True, inplace=False) \
 								.groupby('StoreID')[['StoreID','NumberOfSales']] \
@@ -102,62 +73,29 @@ class TrainPreprocessing():
 		for l in lags:
 			self.data['lag_'+str(l)] = tmp.sort_values(["Date", "StoreID"], axis=0, ascending=True, inplace=False) \
 									  .groupby('StoreID')['NumberOfSales'].shift(l)
-
 		self.data = self.data.dropna()
 
 
-class TestPreprocessing():
-
+class TestPreprocessingAutoreg():
 	def __init__(self, data, from_date, region):
-
 		self.data = copy.deepcopy(data)
 		self.win_size = 60
-
-		event_list = ['Rain', 'Fog', 'NoEvent', 'Snow', 'Thunderstorm', 'Hail']
-		fields = ["StoreType", "WeekDay", "Region", "Month", "AssortmentType"]
-		features = [
-			'StoreID', 'Date', 'IsOpen', 'IsHoliday', 'HasPromotions', 'NumberOfSales',
-			'StoreType_Hyper Market','StoreType_Shopping Center', 'StoreType_Standard Market',
-			'StoreType_Super Market','NearestCompetitor',
-			'WeekDay_0', 'WeekDay_1', 'WeekDay_2','WeekDay_3',
-			'WeekDay_4', 'WeekDay_5', 'WeekDay_6', 'Region_0',
-			'Region_1', 'Region_2', 'Region_3', 'Region_4', 'Region_5',
-			'Region_6','Region_7', 'Region_8', 'Region_9', 'Region_10',
-			'Month_1', 'Month_2','Month_3', 'Month_4', 'Month_5', 'Month_6',
-			'Month_7', 'Month_8','Month_9', 'Month_10', 'Month_11', 'Month_12',
-			'AssortmentType_General','AssortmentType_With Fish Department', 'AssortmentType_With Non-Food Department']
-
 		self.data["Date"] = pd.to_datetime(self.data['Date'], format='%d/%m/%Y')
-
 		n_days_ago = datetime.strptime(from_date, "%Y-%m-%d") - timedelta(days=self.win_size)
-
 		self.add_date_columns(date_column_name="Date", month=True, day_of_week=True)
-
 		self.split_attribute_list(column="Events", attributes=event_list, fillna="NoEvent")
-
 		self.one_hot_encode(fields=fields)
-
 		self.data = self.data[self.data["Region_"+str(region)] == 1]
-
 		self.history = self.data[(self.data["Date"] < from_date) & (self.data["Date"] >= n_days_ago)]
-
 		self.history["NumberOfSales"] = self.history["NumberOfSales"]
-
 		self.history = self.history.sort_values(["Date", "StoreID"], axis=0, ascending=True, inplace=False)
-
 		self.history = np.vstack(self.history.groupby("Date")["NumberOfSales"].apply(lambda x : np.array(x)))
-		
 		self.data = self.data[features]
-
 		self.store_count = len(self.data[self.data["Date"] == from_date]["StoreID"].value_counts())
-
 		self.data = self.data[self.data["Date"] >= from_date]
-		
 		self.dates = sorted(list(self.data["Date"].value_counts().index))
-
 		self.X = self.data.drop(["IsOpen", "NumberOfSales"], inplace=False, axis = 1)
 		self.y = self.data[["StoreID", "Date", "NumberOfSales"]]
-
 
 	def one_hot_encode(self, fields):
 		self.data = pd.get_dummies(self.data, columns=fields)

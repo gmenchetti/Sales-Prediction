@@ -1,23 +1,7 @@
-from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor
 from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.model_selection import cross_validate
-from sklearn.linear_model import LinearRegression
-from sklearn.tree import DecisionTreeRegressor
-from scipy.stats.mstats import winsorize
-from sklearn.svm import LinearSVR, SVR
-from sklearn.metrics import r2_score
-from sklearn.utils import shuffle
-from datetime import datetime, timedelta
-from time import time
 import pandas as pd
 import numpy as np
-from scipy.interpolate import interp1d
-from scipy.stats import gumbel_l, gamma
-from tqdm import *
-import warnings
 import copy
-
-warnings.simplefilter('ignore')
 
 features = [
 	'StoreID', 'Date', 'IsOpen', 'IsHoliday', 'HasPromotions', 'NumberOfSales',
@@ -33,26 +17,16 @@ features = [
 	'AssortmentType_General','AssortmentType_With Fish Department', 'AssortmentType_With Non-Food Department'
 ]
 
-class TrainPreprocessing():
-
+class TrainPreprocessingReg():
 	def __init__(self, data, to_date):
-
 		self.data = copy.deepcopy(data)
-
 		fields = ["StoreType", "WeekDay", "Region", "Month", "AssortmentType"]
-
 		self.data["Date"] = pd.to_datetime(self.data['Date'], format='%d/%m/%Y')
-
 		self.add_date_columns(date_column_name="Date", month=True, day_of_week=True)
-
 		self.one_hot_encode(fields=fields)
-
 		self.data = self.data[features]
-
 		self.data = self.data[self.data["Date"] < to_date]
-
 		self.data = self.data[self.data["IsOpen"] == 1]
-
 		self.X = np.array(self.data.drop(["StoreID", "IsOpen", "Date", "NumberOfSales"], inplace=False, axis = 1))
 		self.y = np.array(self.data["NumberOfSales"])
 
@@ -81,29 +55,18 @@ class TrainPreprocessing():
 			self.data["WeekDay"] = self.data[date_column_name].dt.dayofweek
 
 
-class TestPreprocessing():
-
+class TestPreprocessingReg():
 	def __init__(self, data, from_date):
-
 		self.data = copy.deepcopy(data)
-
 		fields = ["StoreType", "WeekDay", "Region", "Month", "AssortmentType"]
-
 		self.data["Date"] = pd.to_datetime(self.data['Date'], format='%d/%m/%Y')
-
 		self.add_date_columns(date_column_name="Date", month=True, day_of_week=True)
-
 		self.one_hot_encode(fields=fields)
-
 		self.data = self.data[features]
-
 		self.data = self.data[self.data["Date"] >= from_date]
-		
 		self.dates = sorted(list(self.data["Date"].value_counts().index))
-
 		self.X = self.data.drop(["IsOpen", "NumberOfSales"], inplace=False, axis = 1)
 		self.y = self.data[["StoreID", "Date", "NumberOfSales"]]
-
 
 	def one_hot_encode(self, fields):
 		self.data = pd.get_dummies(self.data, columns=fields)
