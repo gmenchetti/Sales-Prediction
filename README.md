@@ -69,3 +69,7 @@ The above approaches have been tested with the following machine learning algori
 Where the *Mean error* is calculated as described in the Evaluation Metric section.
 
 More information about the implementation can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/docs/Paper.pdf">reference paper</a>.
+
+
+## Other Contributors
+* **[Lorenzo Norcini](https://github.com/LorenzoNorcini)**
