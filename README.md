@@ -1,8 +1,7 @@
 # Sales-Prediction
 This repository contains the implementation of a forecasting method to optimize promotions and warehouse stocks, based on machine learning regression methods for the 2018 Data Mining class at Politecnico di Milano.
 
-### NOTE:
-The dataset used is not provided since it is not public.
+**NOTE**: The dataset used is not provided since it is not public.
 
 ## Introduction
 The presented problem is a forecasting problem based on the sales of 769 stores located in 11 different regions. the data is available for a period of 23 months starting from the 01/03/2016.
@@ -43,7 +42,7 @@ The dataset is composed by samples taken from 749 stores, such that:
 - 624 stores with 729 samples
 - 125 stores with 545 samples
 
-A more detailed description of the dataset can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/Paper/Menchetti-Norcini.pdf">reference paper</a>, while an analysis of the data is provided in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/Exploratory_Data_analysis.ipynb">Jupyter notebook</a>.
+A more detailed description of the dataset can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/docs/Paper.pdf">reference paper</a>, while an analysis of the data is provided in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/Exploratory_Data_analysis.ipynb">Jupyter notebook</a>.
 
 ## Implementation
 This project was implemented and tested using **Python 3.6**.
@@ -69,4 +68,4 @@ The above approaches have been tested with the following machine learning algori
 
 Where the *Mean error* is calculated as described in the Evaluation Metric section.
 
-More information about the implementation can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/Paper/Menchetti-Norcini.pdf">reference paper</a>.
+More information about the implementation can be found in the <a href="https://github.com/gmenchetti/Sales-Prediction/blob/master/docs/Paper.pdf">reference paper</a>.
