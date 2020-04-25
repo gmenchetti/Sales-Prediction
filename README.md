@@ -1,7 +1,7 @@
 # Sales-Prediction
 This repository contains the implementation of a forecasting method to optimize promotions and warehouse stocks, based on machine learning regression methods for the 2018 Data Mining class at Politecnico di Milano. 
 
-The [paper](https://github.com/gmenchetti/Sales-Prediction/blob/master/docs/Paper.pdf) and the [presentation](https://github.com/gmenchetti/Sales-Prediction/blob/master/docs/Paper.pdf) give more information about the problem and the data.
+The [paper](https://github.com/gmenchetti/Sales-Prediction/blob/master/docs/Paper.pdf) and the [presentation](https://github.com/gmenchetti/Sales-Prediction/blob/master/docs/Presentation.pdf) give more information about the problem and the data.
 
 **NOTE**: The dataset used is not provided since it is not public.
 
