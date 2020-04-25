@@ -2,21 +2,21 @@
 This repository contains the implementation of a forecasting method to optimize promotions and warehouse stocks, based on machine learning regression methods for the 2018 Data Mining class at Politecnico di Milano.
 
 ### NOTE:
-The dataset used are not provided since they are not public.
+The dataset used is not provided since it is not public.
 
 ## Introduction
-The presented problem is a forecasting problem based on the sales of 769 stores located on 11 different regions. the data is available for a period of 23 months starting from the 01/03/2016.
+The presented problem is a forecasting problem based on the sales of 769 stores located in 11 different regions. the data is available for a period of 23 months starting from the 01/03/2016.
 We decided to treat our problem as a multi-step time series forecasting problem since we have the sales of each store for each day from March 2016 until the end of February 2018 and the objective is to predict sales of the stores for the period 01/03/2018-30/04/2018 based on the given data.
 
 In order to deal with this problem, two main different approaches have been tried:
-- A regression model that does not maintain information of previous predictions
+- A regression model that does not maintain information on previous predictions
 - An autoregressive model that uses information concerning the time maintaining information of previous predictions
 
-In both cases, we first applied some preprocessing to the data, then some Machine Learning models have been tested in order to find the most suitable learning method for this specific problem.
+In both cases, we first applied some preprocessing to the data, then some Machine Learning models have been tested to find the most suitable learning method for this specific problem.
 
-For both methods we tested different type of regression model, both ensemble or simple models.
+For both methods, we tested different types of regression models, both ensemble or simple models.
 
-The performance are evaluated on a test set built with a cross-validation method for time series data.
+The performances are evaluated on a test set built with a cross-validation method for time series data.
 
 ## Evaluation Metric
 The evaluation metric used for this problem is the following:
